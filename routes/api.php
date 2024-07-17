@@ -6,11 +6,9 @@ use App\Http\Controllers\Api\V1\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
-    Route::get('/categories', [CategoryController::class, 'index']);
-    Route::get('/categories/{category}', [CategoryController::class, 'show']);
+    Route::apiResource('categories', CategoryController::class)->only(['index', 'show']);
     Route::get('/categories/{category}/products', [CategoryController::class, 'products']);
-    Route::get('/products', [ProductController::class, 'index']);
-    Route::get('/products/{product}', [ProductController::class, 'show']);
+    Route::apiResource('products', ProductController::class)->only(['index', 'show']);
 
     Route::post('register',[AuthController::class, 'register']);
     Route::post('login',[AuthController::class, 'login']);
