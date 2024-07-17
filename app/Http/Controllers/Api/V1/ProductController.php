@@ -24,9 +24,11 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        $product = Product::create($request->validated());
+        $product = Product::create($request->except('categories'));
 
-        return new ProductResource($product);
+        $product->categories()->attach($request->input('categories'));
+
+        return response()->json($product->load('categories'), 201);
     }
 
     /**
@@ -42,9 +44,11 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        $product->update($request->validated());
+        $product->update($request->except('categories'));
 
-        return new ProductResource($product);
+        $product->categories()->sync($request->input('categories'));
+
+        return response()->json($product->load('categories'), 201);
     }
 
     /**
@@ -53,6 +57,8 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
+
+        $product->categories()->detach();
 
         return response()->noContent();
     }

@@ -27,7 +27,7 @@ class CategoryController extends Controller
     {
         $category = Category::create($request->validated());
 
-        return new CategoryResource($category);
+        return CategoryResource::make($category);
     }
 
     /**
@@ -45,7 +45,7 @@ class CategoryController extends Controller
     {
         $category->update($request->validated());
 
-        return new CategoryResource($category);
+        return CategoryResource::make($category);
     }
 
     /**
@@ -54,6 +54,8 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
+
+        $category->products()->detach();
 
         return response()->noContent();
     }
