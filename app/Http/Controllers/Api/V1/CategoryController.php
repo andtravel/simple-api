@@ -17,7 +17,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return CategoryResource::collection(Category::all());
+        $categories = CategoryResource::collection(Category::all());
+
+        return response()->json($categories);
     }
 
     /**
@@ -62,8 +64,6 @@ class CategoryController extends Controller
 
     public function products(Category $category)
     {
-        $category->load('products');
-
-        return ProductResource::collection($category->products);
+        return ProductResource::collection($category->products)->resolve();
     }
 }
