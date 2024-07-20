@@ -14,12 +14,19 @@ class ProductResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
+        $data = [
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
             'price' => $this->price,
             'quantity' => $this->quantity,
         ];
+
+        if ($request->routeIs('products.index') || $request->routeIs('products.show')) {
+                $data += ['categories' => CategoryResource::collection($this->categories)
+                    ->pluck('id')
+                    ->map(fn ($id) => ['id' => $id, 'name' => $this->categories->where('id', $id)->first()->name])];
+            }
+        return $data;
     }
 }

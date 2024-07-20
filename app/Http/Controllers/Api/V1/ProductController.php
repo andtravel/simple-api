@@ -50,7 +50,7 @@ class ProductController extends Controller
 
         $product->categories()->sync($request->input('categories'));
 
-        return response()->json($product->load('categories'), 201);
+        return response()->json($product->load('categories'), 200);
     }
 
     /**
@@ -59,8 +59,6 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-
-        $product->categories()->detach();
 
         return response()->noContent();
     }
