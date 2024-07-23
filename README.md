@@ -39,8 +39,6 @@ cd simple-api
 #### Приклад виконання:
 ```shell
 composer install
-php artisan key:generate
-php artisan migrate --seed
 ```
 Для Linux, MacOs
 ```shell
@@ -49,6 +47,11 @@ cp .env.example .env
 Для Windows
 ```shell
 copy .env.example .env
+```
+Згенерувати ключ, створити таблиці в базу даних та заповнити фейковими даними
+```shell
+php artisan key:generate
+php artisan migrate --seed
 ```
 
 #### Приклад запуску:
