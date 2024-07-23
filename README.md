@@ -62,3 +62,4 @@ php artisan l5-swagger:generate
 
 php artisan serve
 ```
+Перейти за посиланням [http://localhost:8000/api/documentation](http://localhost:8000/api/documentation)
