@@ -7,7 +7,6 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -30,7 +29,7 @@ class ProductController extends Controller
 
         $product->categories()->attach($request->input('categories'));
 
-        return response()->json($product->load('categories'), 201);
+        return response()->json(ProductResource::make($product), 201);
     }
 
     /**
@@ -38,7 +37,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return ProductResource::make($product);
+        return ProductResource::make($product)->resolve();
     }
 
     /**
@@ -50,7 +49,7 @@ class ProductController extends Controller
 
         $product->categories()->sync($request->input('categories'));
 
-        return response()->json($product->load('categories'), 200);
+        return response()->json(ProductResource::make($product), 200);
     }
 
     /**

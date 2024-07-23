@@ -76,8 +76,12 @@ class AuthControllerTest extends TestCase
         $this->getJson('/api/v1/user')
             ->assertOk()
             ->assertJsonStructure([
-                'user' => ['id', 'name', 'email'],
-            ]);
+                    'id',
+                    'name',
+                    'email',
+                    'created_at',
+                    'updated_at',
+             ]);
     }
 
     public function test_unauthenticated_user_cannot_see_profile()

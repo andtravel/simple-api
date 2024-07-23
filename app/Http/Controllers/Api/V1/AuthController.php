@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -70,8 +69,6 @@ class AuthController extends Controller
 
     public function user()
     {
-        return response()->json([
-            'user' => auth()->user(),
-            ]);
+        return response()->json(auth()->user(), 200);
     }
 }

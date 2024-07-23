@@ -2,11 +2,9 @@
 
 namespace Tests\Unit;
 
-use AllowDynamicProperties;
 use App\Http\Resources\ProductResource;
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -55,11 +53,9 @@ class CategoryControllerTest extends TestCase
 
         $response->assertOk()
         ->assertJsonStructure([
-            '*' => [
                 'id',
                 'name',
                 'products'
-            ]
         ]);
 
         $response->assertJsonFragment([
@@ -82,11 +78,8 @@ class CategoryControllerTest extends TestCase
 
         $response->assertStatus(201)
             ->assertJsonStructure([
-                '*' => [
                     'id',
                     'name',
-                    'products'
-                ]
             ]);
 
         $response->assertJsonFragment([
@@ -123,11 +116,9 @@ class CategoryControllerTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJsonStructure([
-                '*' => [
                     'id',
                     'name',
                     'products'
-                ]
             ]);
 
         $response->assertJsonFragment([

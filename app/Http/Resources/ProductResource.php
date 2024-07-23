@@ -19,14 +19,18 @@ class ProductResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'price' => $this->price,
-            'quantity' => $this->quantity,
-        ];
+            'quantity' => $this->quantity
+            ];
 
-        if ($request->routeIs('products.index') || $request->routeIs('products.show')) {
-                $data += ['categories' => CategoryResource::collection($this->categories)
-                    ->pluck('id')
-                    ->map(fn ($id) => ['id' => $id, 'name' => $this->categories->where('id', $id)->first()->name])];
-            }
+        if (! $request->routeIs(
+            'categories.show',
+            'categories.index',
+            'categories.update',
+            'categories.products')) {
+                $data += ['categories' => $this->categories
+                    ->map(fn ($category) => [ 'id' => $category->id, 'name' => $category->name])];
+        }
+
         return $data;
     }
 }

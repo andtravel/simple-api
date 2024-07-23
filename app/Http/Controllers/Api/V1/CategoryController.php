@@ -8,7 +8,6 @@ use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\ProductResource;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -29,7 +28,7 @@ class CategoryController extends Controller
     {
         $category = Category::create($request->validated());
 
-        return CategoryResource::make($category);
+        return response()->json($category->only(['id', 'name']), 201);
     }
 
     /**
@@ -37,7 +36,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return CategoryResource::make($category);
+        return CategoryResource::make($category)->resolve();
     }
 
     /**
@@ -45,9 +44,11 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        $category->update($request->validated());
+        $category->update($request->except('products'));
 
-        return CategoryResource::make($category);
+        $category->products()->sync($request->input('products'));
+
+        return response()->json(CategoryResource::make($category), 200);
     }
 
     /**
