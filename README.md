@@ -34,14 +34,19 @@
 git clone https://github.com/andtravel/simple-api.git
 
 cd simple-api
-
-git checkout master
-git pull origin master
 ```
 
 #### Приклад виконання:
 ```shell
 composer install
+```
+Для Linux, MacOs
+```shell
+cp .env.example .env
+```
+Для Windows
+```shell
+copy .env.example .env
 ```
 
 #### Приклад запуску:
@@ -49,17 +54,12 @@ composer install
 php artisan migrate --seed
 php artisan serve
 ```
-Для виконання тестів використовується PHPUnit
 
 #### Приклад запуску тестів:
 ```shell
 php artisan test
 ```
 
-#### Приклад використання API документацією:
-```shell
-php artisan l5-swagger:generate
+#### Приклад використання API документації:
 
-php artisan serve
-```
 Перейти за посиланням [http://localhost:8000/api/documentation](http://localhost:8000/api/documentation)
