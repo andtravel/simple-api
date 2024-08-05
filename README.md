@@ -30,37 +30,37 @@
 #### У результаті виконання отримуємо пет-проект із тестами та API документацією.
 
 #### Приклад використання:
-```shell
+```bash
 git clone https://github.com/andtravel/simple-api.git
 
 cd simple-api
 ```
 
 #### Приклад виконання:
-```shell
+```bash
 composer install
 ```
 Для Linux, MacOs
-```shell
+```bash
 cp .env.example .env
 ```
 Для Windows
-```shell
+```bash
 copy .env.example .env
 ```
 Згенерувати ключ, створити таблиці в базу даних та заповнити фейковими даними
-```shell
+```bash
 php artisan key:generate
 php artisan migrate --seed
 ```
 
 #### Приклад запуску:
-```shell
+```bash
 php artisan serve
 ```
 
 #### Приклад запуску тестів:
-```shell
+```bash
 php artisan test
 ```
 
